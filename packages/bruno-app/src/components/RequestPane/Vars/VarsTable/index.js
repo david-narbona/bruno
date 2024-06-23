@@ -115,24 +115,27 @@ const VarsTable = ({ item, collection, vars, varType }) => {
                       />
                     </td>
                     <td>
-                      <SingleLineEditor
-                        value={_var.value}
-                        theme={storedTheme}
-                        onSave={onSave}
-                        onChange={(newValue) =>
-                          handleVarChange(
-                            {
-                              target: {
-                                value: newValue
-                              }
-                            },
-                            _var,
-                            'value'
-                          )
-                        }
-                        onRun={handleRun}
-                        collection={collection}
-                      />
+                      <div className="flex items-center">
+                        <SingleLineEditor
+                          value={_var.value}
+                          theme={storedTheme}
+                          onSave={onSave}
+                          onChange={(newValue) =>
+                            handleVarChange(
+                              {
+                                target: {
+                                  value: newValue
+                                }
+                              },
+                              _var,
+                              'value'
+                            )
+                          }
+                          onRun={handleRun}
+                          collection={collection}
+                        />
+                        <Tooltip text={_var.value} tooltipId={`${_var.name}-value`} />
+                      </div>
                     </td>
                     <td>
                       <div className="flex items-center">
