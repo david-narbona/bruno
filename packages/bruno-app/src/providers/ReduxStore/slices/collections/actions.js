@@ -212,6 +212,7 @@ export const sendCollectionOauth2Request = (collectionUid, itemUid) => (dispatch
 export const sendRequest = (item, collectionUid) => (dispatch, getState) => {
   const state = getState();
   const collection = findCollectionByUid(state.collections.collections, collectionUid);
+  console.log(collection);
 
   return new Promise((resolve, reject) => {
     if (!collection) {
@@ -806,7 +807,7 @@ export const newHttpRequest = (params) => (dispatch, getState) => {
   });
 };
 
-export const addEnvironment = (name, collectionUid) => (dispatch, getState) => {
+export const addEnvironment = (name, isCritical, collectionUid) => (dispatch, getState) => {
   return new Promise((resolve, reject) => {
     const state = getState();
     const collection = findCollectionByUid(state.collections.collections, collectionUid);
@@ -815,7 +816,7 @@ export const addEnvironment = (name, collectionUid) => (dispatch, getState) => {
     }
 
     ipcRenderer
-      .invoke('renderer:create-environment', collection.pathname, name)
+      .invoke('renderer:create-environment', collection.pathname, name, isCritical)
       .then(
         dispatch(
           updateLastAction({

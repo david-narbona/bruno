@@ -233,7 +233,7 @@ const registerRendererEventHandlers = (mainWindow, watcher, lastOpenedCollection
   });
 
   // create environment
-  ipcMain.handle('renderer:create-environment', async (event, collectionPathname, name, variables) => {
+  ipcMain.handle('renderer:create-environment', async (event, collectionPathname, name, isCritical, variables) => {
     try {
       const envDirPath = path.join(collectionPathname, 'environments');
       if (!fs.existsSync(envDirPath)) {
@@ -247,6 +247,7 @@ const registerRendererEventHandlers = (mainWindow, watcher, lastOpenedCollection
 
       const environment = {
         name: name,
+        isCritical: isCritical || false,
         variables: variables || []
       };
 

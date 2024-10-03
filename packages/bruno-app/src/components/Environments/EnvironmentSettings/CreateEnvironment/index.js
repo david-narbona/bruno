@@ -13,7 +13,8 @@ const CreateEnvironment = ({ collection, onClose }) => {
   const formik = useFormik({
     enableReinitialize: true,
     initialValues: {
-      name: ''
+      name: '',
+      isCritical: false
     },
     validationSchema: Yup.object({
       name: Yup.string()
@@ -22,7 +23,7 @@ const CreateEnvironment = ({ collection, onClose }) => {
         .required('name is required')
     }),
     onSubmit: (values) => {
-      dispatch(addEnvironment(values.name, collection.uid))
+      dispatch(addEnvironment(values.name, values.isCritical, collection.uid))
         .then(() => {
           toast.success('Environment created in collection');
           onClose();
@@ -69,6 +70,26 @@ const CreateEnvironment = ({ collection, onClose }) => {
                 onChange={formik.handleChange}
                 value={formik.values.name || ''}
               />
+            </div>
+            <div class="flex mt-2">
+              <label htmlFor="is-critical" className="block font-semibold">
+                Is Critical
+              </label>
+              <div class="ml-2 mt-1">
+                <input
+                  id="is-critical"
+                  type="checkbox"
+                  name="is-critical"
+                  ref={inputRef}
+                  className="block textbox w-full"
+                  autoComplete="off"
+                  autoCorrect="off"
+                  autoCapitalize="off"
+                  spellCheck="false"
+                  onChange={formik.handleChange}
+                  value={formik.values.name || ''}
+              />
+              </div>
             </div>
             {formik.touched.name && formik.errors.name ? (
               <div className="text-red-500">{formik.errors.name}</div>

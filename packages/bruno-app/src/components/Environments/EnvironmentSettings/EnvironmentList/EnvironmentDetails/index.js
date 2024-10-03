@@ -9,6 +9,7 @@ const EnvironmentDetails = ({ environment, collection, setIsModified }) => {
   const [openEditModal, setOpenEditModal] = useState(false);
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
   const [openCopyModal, setOpenCopyModal] = useState(false);
+  console.log(environment);
 
   return (
     <div className="px-6 flex-grow flex flex-col pt-6" style={{ maxWidth: '700px' }}>
@@ -28,9 +29,11 @@ const EnvironmentDetails = ({ environment, collection, setIsModified }) => {
       <div className="flex">
         <div className="flex flex-grow items-center">
           <IconDatabase className="cursor-pointer" size={20} strokeWidth={1.5} />
-          <span className="ml-1 font-semibold break-all">{environment.name}</span>
+          <span className="ml-1 font-semibold break-all">{environment.name} - {environment.isCritical}</span>
         </div>
         <div className="flex gap-x-4 pl-4">
+          {/* <label htmlFor="isCriticalEnvironment">Is critical</label>
+          <input type="checkbox" id="isCritialEnvironment" name="isCriticalEnvironment" /> */}
           <IconEdit className="cursor-pointer" size={20} strokeWidth={1.5} onClick={() => setOpenEditModal(true)} />
           <IconCopy className="cursor-pointer" size={20} strokeWidth={1.5} onClick={() => setOpenCopyModal(true)} />
           <IconTrash className="cursor-pointer" size={20} strokeWidth={1.5} onClick={() => setOpenDeleteModal(true)} />
